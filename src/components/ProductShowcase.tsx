@@ -4,6 +4,7 @@ const products = [
   {
     icon: DoorOpen,
     title: 'Aluminum Doors',
+    slug: 'doors',
     description: 'Sleek, durable doors with superior insulation and modern designs.',
     features: ['Sliding Doors', 'French Doors', 'Entry Doors', 'Patio Doors'],
     imageUrl: 'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=800'
@@ -11,6 +12,7 @@ const products = [
   {
     icon: Frame,
     title: 'Windows',
+    slug: 'windows',
     description: 'Energy-efficient windows that combine style and functionality.',
     features: ['Casement Windows', 'Sliding Windows', 'Bay Windows', 'Awning Windows'],
     imageUrl: 'https://images.pexels.com/photos/279810/pexels-photo-279810.jpeg?auto=compress&cs=tinysrgb&w=800'
@@ -18,13 +20,18 @@ const products = [
   {
     icon: ChefHat,
     title: 'Kitchen Solutions',
+    slug: 'kitchen',
     description: 'Custom aluminum kitchen cabinets and fixtures built to perfection.',
     features: ['Cabinets', 'Countertops', 'Backsplashes', 'Storage Systems'],
     imageUrl: 'https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800'
   }
 ];
 
-export default function ProductShowcase() {
+interface ProductShowcaseProps {
+  onCategoryClick: (categorySlug: string) => void;
+}
+
+export default function ProductShowcase({ onCategoryClick }: ProductShowcaseProps) {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,7 +83,10 @@ export default function ProductShowcase() {
                   ))}
                 </div>
 
-                <button className="w-full mt-6 bg-gray-900 text-white py-3 rounded-lg font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center justify-center space-x-2">
+                <button
+                  onClick={() => onCategoryClick(product.slug)}
+                  className="w-full mt-6 bg-gray-900 text-white py-3 rounded-lg font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
                   <span>Learn More</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
